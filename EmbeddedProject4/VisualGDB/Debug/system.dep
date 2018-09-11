@@ -1,0 +1,35 @@
+VisualGDB/Debug/system.o: \
+ C:/Users/tB/Desktop/SLandSLC/SuperLogic3\ 20-1-2016/src/system.c \
+ C:/Users/tB/Desktop/SLandSLC/SuperLogic3\ 20-1-2016/src/system.h \
+ C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/clock.h \
+ C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/systick.h \
+ C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/typedefs.h \
+ c:\sysgcc\arm-eabi\lib\gcc\arm-eabi\7.2.0\include\stdint.h \
+ c:\sysgcc\arm-eabi\arm-eabi\sys-include\stdint.h \
+ c:\sysgcc\arm-eabi\arm-eabi\sys-include\machine\_default_types.h \
+ c:\sysgcc\arm-eabi\arm-eabi\sys-include\sys\features.h \
+ c:\sysgcc\arm-eabi\arm-eabi\sys-include\_newlib_version.h \
+ c:\sysgcc\arm-eabi\arm-eabi\sys-include\sys\_intsup.h \
+ c:\sysgcc\arm-eabi\arm-eabi\sys-include\sys\_stdint.h
+
+C:/Users/tB/Desktop/SLandSLC/SuperLogic3\ 20-1-2016/src/system.h:
+
+C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/clock.h:
+
+C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/systick.h:
+
+C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/typedefs.h:
+
+c:\sysgcc\arm-eabi\lib\gcc\arm-eabi\7.2.0\include\stdint.h:
+
+c:\sysgcc\arm-eabi\arm-eabi\sys-include\stdint.h:
+
+c:\sysgcc\arm-eabi\arm-eabi\sys-include\machine\_default_types.h:
+
+c:\sysgcc\arm-eabi\arm-eabi\sys-include\sys\features.h:
+
+c:\sysgcc\arm-eabi\arm-eabi\sys-include\_newlib_version.h:
+
+c:\sysgcc\arm-eabi\arm-eabi\sys-include\sys\_intsup.h:
+
+c:\sysgcc\arm-eabi\arm-eabi\sys-include\sys\_stdint.h:

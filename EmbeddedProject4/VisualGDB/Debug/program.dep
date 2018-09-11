@@ -1,0 +1,71 @@
+VisualGDB/Debug/program.o: program.c program.h system.h \
+ C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/typedefs.h \
+ c:\sysgcc\arm-eabi\lib\gcc\arm-eabi\7.2.0\include\stdint.h \
+ c:\sysgcc\arm-eabi\arm-eabi\sys-include\stdint.h \
+ c:\sysgcc\arm-eabi\arm-eabi\sys-include\machine\_default_types.h \
+ c:\sysgcc\arm-eabi\arm-eabi\sys-include\sys\features.h \
+ c:\sysgcc\arm-eabi\arm-eabi\sys-include\_newlib_version.h \
+ c:\sysgcc\arm-eabi\arm-eabi\sys-include\sys\_intsup.h \
+ c:\sysgcc\arm-eabi\arm-eabi\sys-include\sys\_stdint.h debug.h typedefs.h \
+ timeout.h delay.h host.h error.h \
+ C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/frame.h \
+ C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/typedefs.h \
+ C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/crc.h \
+ C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/cycleBuffer.h \
+ C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/general.h \
+ peripherals.h platform.h \
+ C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/config.h \
+ C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/cycleBuffer.h \
+ clock.h
+
+program.h:
+
+system.h:
+
+C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/typedefs.h:
+
+c:\sysgcc\arm-eabi\lib\gcc\arm-eabi\7.2.0\include\stdint.h:
+
+c:\sysgcc\arm-eabi\arm-eabi\sys-include\stdint.h:
+
+c:\sysgcc\arm-eabi\arm-eabi\sys-include\machine\_default_types.h:
+
+c:\sysgcc\arm-eabi\arm-eabi\sys-include\sys\features.h:
+
+c:\sysgcc\arm-eabi\arm-eabi\sys-include\_newlib_version.h:
+
+c:\sysgcc\arm-eabi\arm-eabi\sys-include\sys\_intsup.h:
+
+c:\sysgcc\arm-eabi\arm-eabi\sys-include\sys\_stdint.h:
+
+debug.h:
+
+typedefs.h:
+
+timeout.h:
+
+delay.h:
+
+host.h:
+
+error.h:
+
+C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/frame.h:
+
+C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/typedefs.h:
+
+C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/crc.h:
+
+C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/cycleBuffer.h:
+
+C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/general.h:
+
+peripherals.h:
+
+platform.h:
+
+C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/config.h:
+
+C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/cycleBuffer.h:
+
+clock.h:

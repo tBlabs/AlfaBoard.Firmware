@@ -1,0 +1,61 @@
+VisualGDB/Debug/host.o: host.c host.h error.h typedefs.h \
+ c:\sysgcc\arm-eabi\lib\gcc\arm-eabi\7.2.0\include\stdint.h \
+ c:\sysgcc\arm-eabi\arm-eabi\sys-include\stdint.h \
+ c:\sysgcc\arm-eabi\arm-eabi\sys-include\machine\_default_types.h \
+ c:\sysgcc\arm-eabi\arm-eabi\sys-include\sys\features.h \
+ c:\sysgcc\arm-eabi\arm-eabi\sys-include\_newlib_version.h \
+ c:\sysgcc\arm-eabi\arm-eabi\sys-include\sys\_intsup.h \
+ c:\sysgcc\arm-eabi\arm-eabi\sys-include\sys\_stdint.h \
+ C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/frame.h \
+ C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/typedefs.h \
+ C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/crc.h \
+ C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/cycleBuffer.h \
+ C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/general.h \
+ C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/usart2.h \
+ C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/typedefs.h \
+ global.h cycleBuffer.h params.h frame.h \
+ C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/parser.h
+
+host.h:
+
+error.h:
+
+typedefs.h:
+
+c:\sysgcc\arm-eabi\lib\gcc\arm-eabi\7.2.0\include\stdint.h:
+
+c:\sysgcc\arm-eabi\arm-eabi\sys-include\stdint.h:
+
+c:\sysgcc\arm-eabi\arm-eabi\sys-include\machine\_default_types.h:
+
+c:\sysgcc\arm-eabi\arm-eabi\sys-include\sys\features.h:
+
+c:\sysgcc\arm-eabi\arm-eabi\sys-include\_newlib_version.h:
+
+c:\sysgcc\arm-eabi\arm-eabi\sys-include\sys\_intsup.h:
+
+c:\sysgcc\arm-eabi\arm-eabi\sys-include\sys\_stdint.h:
+
+C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/frame.h:
+
+C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/typedefs.h:
+
+C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/crc.h:
+
+C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/cycleBuffer.h:
+
+C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/general.h:
+
+C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/usart2.h:
+
+C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/typedefs.h:
+
+global.h:
+
+cycleBuffer.h:
+
+params.h:
+
+frame.h:
+
+C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/parser.h:
