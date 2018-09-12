@@ -12,9 +12,11 @@
 #include <typedefs.h>
 #include "error.h"
 #include "global.h"
+#include "leds.h"
+#include "buttons.h"
 #include "params.h"
 #include <parser.h>
-
+#include "pins.h"
 
 void SendOk(void)
 {
@@ -31,9 +33,10 @@ void SendError(error_t errorCode)
 	Usart2_EnableTxInterrupt(); // Send data from usart2RxCycleBuffer
 }
 
-void SendValue(u32 value)
+void SendValue(u8 addr, u32 value)
 {
-	FrameBufferBuilder_Start(&usart2TxCycleBuffer, frameType_Error); // Start frame in Tx buffer
+	FrameBufferBuilder_Start(&usart2TxCycleBuffer, frameType_Update); // Start frame in Tx buffer
+	CycleBuffer_Add(&usart2TxCycleBuffer, addr);
 	CycleBuffer_AddU32(&usart2TxCycleBuffer, value);
 	FrameBufferBuilder_End(&usart2TxCycleBuffer); // Recalculate frame size, crc, etc.
 	Usart2_EnableTxInterrupt(); // Send data from usart2RxCycleBuffer
@@ -54,12 +57,33 @@ ioAddr_t;
 
 u32 PeripheralsManager_GetValueByAddr(ioAddr_t ioAddr)
 {
-//	switch (ioAddr)
-//	{
-//		case ioAddr_Input1: return Led1_GetValue();
-//	}
-//	
+	switch (ioAddr)
+	{
+		case ioAddr_Input1: return Button1_Get();
+		case ioAddr_Input2: return Button2_Get();
+		case ioAddr_Input3: return Button3_Get();
+		case ioAddr_Input4: return Button4_Get();
+		case ioAddr_Led1: return Led1_Get();
+		case ioAddr_Led2: return Led2_Get();
+		case ioAddr_Led3: return Led3_Get();
+		case ioAddr_Led4: return Led4_Get();
+	}
+	
 	return 0;
+}
+
+boolean PeripheralsManager_SetValueByAddr(ioAddr_t ioAddr, u32 value)
+{
+	switch (ioAddr)
+	{
+		case ioAddr_Led1: Led1_Set(value); break;
+		case ioAddr_Led2: Led2_Set(value); break;
+		case ioAddr_Led3: Led3_Set(value); break;
+		case ioAddr_Led4: Led4_Set(value); break;
+		default: return false;
+	}
+	
+	return true;
 }
 
 
@@ -99,8 +123,23 @@ void FrameControl(frame_t * frame)
 			if (frame->dataSize == 1)
 			{
 				ioAddr_t addr = (ioAddr_t)frame->data[0]; // TODO: validate addr range
+				
 				u32 value = PeripheralsManager_GetValueByAddr(addr);
-				SendValue(value);
+				
+				SendValue(addr, value);
+			}	
+			else SendError(error_UNHANDLED_ERROR);
+	
+		case frameType_SetValue:
+			if (frame->dataSize == 1)
+			{
+				ioAddr_t addr = (ioAddr_t)frame->data[0]; // TODO: validate addr range
+				u32 value = GetU32(frame->data, 1);
+				
+				boolean success = PeripheralsManager_SetValueByAddr(addr, value);
+				if (!success) SendError(error_OUT_OF_ARRAY_RANGE);
+		
+				SendValue(addr, value);
 			}	
 			else SendError(error_UNHANDLED_ERROR);
 			break;

@@ -13,8 +13,14 @@ VisualGDB/Debug/host.o: host.c host.h error.h typedefs.h \
  C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/general.h \
  C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/usart2.h \
  C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/typedefs.h \
- global.h cycleBuffer.h params.h frame.h \
- C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/parser.h
+ global.h cycleBuffer.h leds.h buttons.h params.h frame.h \
+ C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/parser.h \
+ pins.h \
+ C:/Users/tB/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F1xxxx/CMSIS_StdPeriph/CM3/DeviceSupport/ST/STM32F10x/stm32f10x.h \
+ C:/Users/tB/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F1xxxx/CMSIS_StdPeriph/CM3/CoreSupport/core_cm3.h \
+ C:/Users/tB/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F1xxxx/CMSIS_StdPeriph/CM3/DeviceSupport/ST/STM32F10x/system_stm32f10x.h \
+ C:/Users/tB/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F1xxxx/STM32F10x_StdPeriph_Driver/inc/stm32f10x_gpio.h \
+ C:/Users/tB/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F1xxxx/STM32F10x_StdPeriph_Driver/inc/stm32f10x_rcc.h
 
 host.h:
 
@@ -54,8 +60,24 @@ global.h:
 
 cycleBuffer.h:
 
+leds.h:
+
+buttons.h:
+
 params.h:
 
 frame.h:
 
 C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/parser.h:
+
+pins.h:
+
+C:/Users/tB/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F1xxxx/CMSIS_StdPeriph/CM3/DeviceSupport/ST/STM32F10x/stm32f10x.h:
+
+C:/Users/tB/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F1xxxx/CMSIS_StdPeriph/CM3/CoreSupport/core_cm3.h:
+
+C:/Users/tB/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F1xxxx/CMSIS_StdPeriph/CM3/DeviceSupport/ST/STM32F10x/system_stm32f10x.h:
+
+C:/Users/tB/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F1xxxx/STM32F10x_StdPeriph_Driver/inc/stm32f10x_gpio.h:
+
+C:/Users/tB/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F1xxxx/STM32F10x_StdPeriph_Driver/inc/stm32f10x_rcc.h:

@@ -20,6 +20,10 @@ void Led1_Set(u16 ledState); // Led is on when ledState!=0
 void Led2_Set(u16 ledState);
 void Led3_Set(u16 ledState);
 void Led4_Set(u16 ledState);
+boolean Led1_Get();
+boolean Led2_Get();
+boolean Led3_Get();
+boolean Led4_Get();
 
 /*** If LED_DEBUG_ENABLE==1 **********************************************************************/
 

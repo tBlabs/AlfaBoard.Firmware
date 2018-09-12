@@ -21,6 +21,7 @@ typedef enum
     frameType_Param, // for virtual parser (one of physical devices)
 	frameType_GetValue,
 	frameType_SetValue,
+	frameType_Update,
 }
 frameType_t;
 
