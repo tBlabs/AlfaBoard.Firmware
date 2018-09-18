@@ -33,9 +33,8 @@ void Error(error_t errorCode)
 	if (errorCode < ERRORS_COUNT)
 	{
 		Debug("ERROR %u", errorCode);
-
 	}
-	else Error(error_UNHANDLED_ERROR);
+	else Error(error_UNKNOWN_ERROR);
 }
 
 /*************************************************************************************************/

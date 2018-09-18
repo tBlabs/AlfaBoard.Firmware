@@ -17,7 +17,6 @@ void SendIntro(void);
 void LoadMap(frame_t * frame);
 void LogicRun(void);
 void LogicHold(void);
-void FrameControl(frame_t * frame);
 void HostTask(void);
 
 #endif /* HOST_H_ */

@@ -194,11 +194,10 @@ configParseReturn_t Config_Parse(frame_t * frame)
 									default: break;
 								}
 							}
-							else { Error(error_INCOMPATIBILITY_OF_TYPES); goto error; }
+							else { Error(error_UNKNOWN_ERROR); goto error; }
 						}
 					}
-					else { Error(error_PARAM_NOT_FOUND); goto error; }
-
+					else { Error(error_UNKNOWN_ERROR); goto error; }
 				}
 			} // while
 		} // paramCount != 0

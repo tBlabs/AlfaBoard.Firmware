@@ -87,61 +87,65 @@ boolean PeripheralsManager_SetValueByAddr(ioAddr_t ioAddr, u32 value)
 }
 
 
-void FrameControl(frame_t * frame)
+void FrameParserSwitch(frameType_t frameType, u8 * data, u16 dataSize)
 {
-	switch (frame->type)
+	switch (frameType)
 	{
 		case frameType_Test:
 			SendOk();
 			break;
 
-		case frameType_Config:
-			if (Config_Parse(frame))
-			{
-				SendOk();
-			}
-			else
-			{
-				SendError(error_CONFIG_PARSE_PROBLEM);
-			}
-			break;
+//		case frameType_Config:
+//			if (Config_Parse(frame))
+//			{
+//				SendOk();
+//			}
+//			else
+//			{
+//				SendError(error_CONFIG_PARSE_PROBLEM);
+//			}
+//			break;
 
-		case frameType_Param:
-			if (frame->dataSize == 4)
-			{
-				u16 paramCode = GetU16(frame->data, 0);
-				u16 paramValue = GetU16(frame->data, 2);
-
-				Parser_ParamReceived(paramCode, paramValue);
-
-				SendOk();
-			}
-			else SendError(error_PARAM_FRAME_PROBLEM);
-			break;
+//		case frameType_Param:
+//			if (frame->dataSize == 4)
+//			{
+//				u16 paramCode = GetU16(frame->data, 0);
+//				u16 paramValue = GetU16(frame->data, 2);
+//
+//				Parser_ParamReceived(paramCode, paramValue);
+//
+//				SendOk();
+//			}
+//			else SendError(error_PARAM_FRAME_PROBLEM);
+//			break;
 		
 		case frameType_GetValue:
-			if (frame->dataSize == 1)
+			if (dataSize == 1)
 			{
-				ioAddr_t addr = (ioAddr_t)frame->data[0]; // TODO: validate addr range
+				ioAddr_t addr = (ioAddr_t)data[0]; // TODO: validate addr range
 				
 				u32 value = PeripheralsManager_GetValueByAddr(addr);
 				
 				SendValue(addr, value);
 			}	
-			else SendError(error_UNHANDLED_ERROR);
+			else SendError(error_UNKNOWN_ERROR);
 	
 		case frameType_SetValue:
-			if (frame->dataSize == 1)
+			if (dataSize == 5)
 			{
-				ioAddr_t addr = (ioAddr_t)frame->data[0]; // TODO: validate addr range
-				u32 value = GetU32(frame->data, 1);
+				ioAddr_t addr = (ioAddr_t)data[0]; // TODO: validate addr range
+				u32 value = GetU32(data, 1);
 				
 				boolean success = PeripheralsManager_SetValueByAddr(addr, value);
-				if (!success) SendError(error_OUT_OF_ARRAY_RANGE);
+				if (!success) SendError(error_UNKNOWN_ERROR);
 		
 				SendValue(addr, value);
 			}	
-			else SendError(error_UNHANDLED_ERROR);
+			else SendError(error_UNKNOWN_ERROR);
+			break;
+		
+		default: 
+			SendError(error_INVALID_FRAME_TYPE);
 			break;
 	}
 }
@@ -149,13 +153,13 @@ void FrameControl(frame_t * frame)
 void HostTask(void)
 {
 	static u8 b;
-	static frame_t receivedFrame;
+	static frame_t frame;
 
 	while (CycleBuffer_GetNewByte(&usart2RxCycleBuffer, &b))
 	{
-		if (Frame_Parse(&receivedFrame, b))
+		if (Frame_Parse(&frame, b))
 		{
-			FrameControl(&receivedFrame);
+			FrameParserSwitch(frame.type, frame.data, frame.dataSize);
 		}
 	}
 }
