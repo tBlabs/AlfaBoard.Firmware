@@ -1,5 +1,9 @@
-﻿  host.c
+﻿  frame.c
+  host.c
+  main.c
+  params.c
+  program.c
   Linking ../VisualGDB/Debug/EmbeddedProject4...
   ------------------- Memory utilization report -------------------
-  Used FLASH: 16KB out of 256KB (6%) [+36]
-  Used SRAM: 6536 bytes out of 24KB (26%) [+4]
+  Used FLASH: 16KB out of 256KB (6%)
+  Used SRAM: 6536 bytes out of 24KB (26%)

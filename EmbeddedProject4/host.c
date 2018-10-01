@@ -25,21 +25,22 @@
 
 void SendPong(void)
 {
-	FrameBufferBuilder_Start(&usart2TxCycleBuffer, frameType_Pong);          // Start frame in Tx buffer
+	FrameBufferBuilder_Start(&usart2TxCycleBuffer, responseFrameType_Pong);          // Start frame in Tx buffer
 	FrameBufferBuilder_End(&usart2TxCycleBuffer);          // Recalculate frame size, crc, etc.
 	Usart2_EnableTxInterrupt();          // Send data from usart2RxCycleBuffer
 }
 
 void SendError(error_t errorCode)
 {
-	FrameBufferBuilder_Start(&usart2TxCycleBuffer, frameType_Error);          // Start frame in Tx buffer
+	FrameBufferBuilder_Start(&usart2TxCycleBuffer, responseFrameType_Error);          // Start frame in Tx buffer
 	CycleBuffer_Add(&usart2TxCycleBuffer, (u8)errorCode);
 	FrameBufferBuilder_End(&usart2TxCycleBuffer);          // Recalculate frame size, crc, etc.
 	Usart2_EnableTxInterrupt();          // Send data from usart2RxCycleBuffer
 }
+
 void SendPushState(boolean state)
 {
-	FrameBufferBuilder_Start(&usart2TxCycleBuffer, frameType_Push);          // Start frame in Tx buffer
+	FrameBufferBuilder_Start(&usart2TxCycleBuffer, responseFrameType_PushStateUpdate);          // Start frame in Tx buffer
 	CycleBuffer_Add(&usart2TxCycleBuffer, (u8)state);
 	FrameBufferBuilder_End(&usart2TxCycleBuffer);          // Recalculate frame size, crc, etc.
 	Usart2_EnableTxInterrupt();          // Send data from usart2RxCycleBuffer
@@ -47,7 +48,7 @@ void SendPushState(boolean state)
 
 void SendValue(u8 addr, u32 value)
 {
-	FrameBufferBuilder_Start(&usart2TxCycleBuffer, frameType_Update);          // Start frame in Tx buffer
+	FrameBufferBuilder_Start(&usart2TxCycleBuffer, responseFrameType_Update);          // Start frame in Tx buffer
 	CycleBuffer_Add(&usart2TxCycleBuffer, addr);
 	CycleBuffer_AddU32(&usart2TxCycleBuffer, value);
 	FrameBufferBuilder_End(&usart2TxCycleBuffer);          // Recalculate frame size, crc, etc.
@@ -56,7 +57,7 @@ void SendValue(u8 addr, u32 value)
 
 void SendValues(u32 * values)
 {
-	FrameBufferBuilder_Start(&usart2TxCycleBuffer, frameType_UpdateAll);         // Start frame in Tx buffer
+	FrameBufferBuilder_Start(&usart2TxCycleBuffer, responseFrameType_UpdateAll);         // Start frame in Tx buffer
 	for(u8 i = 0 ; i < SENSORS_COUNT ; i++)
 		CycleBuffer_AddU32(&usart2TxCycleBuffer, values[i]);
 	FrameBufferBuilder_End(&usart2TxCycleBuffer);         // Recalculate frame size, crc, etc.
@@ -162,35 +163,30 @@ void ReadAndSendAllValues()
 	SendValues(values);
 }
 
-void FrameParserSwitch(frameType_t frameType, u8 * data, u16 dataSize)
+void FrameParserSwitch(requestFrameType_t frameType, u8 * data, u16 dataSize)
 {
 	switch (frameType)
 	{
-	case frameType_Ping:
+	case requestFrameType_Ping:
 		SendPong();
 		break;
 		
-	case frameType_PushEnable:
-		if (dataSize != 1)
+	case requestFrameType_PushStateSet:
+		if (dataSize != 2)
 		{
 			SendError(error_INVALID_FRAME_SIZE);
 			break;
 		}
-		push = true;
-		scanInterval = data[0];
+		push = data[0];
+		scanInterval = data[1];
 		SendPushState(push);		
 		break;
 		
-	case frameType_PushDisable:
-		push = false;
-		SendPushState(push);		
-		break;
-		
-	case frameType_GetAll:
+	case requestFrameType_GetAll:
 		ReadAndSendAllValues();
 		break;
 
-	case frameType_GetValue:
+	case requestFrameType_Get:
 		if (dataSize == 1)
 		{
 			ioAddr_t addr = (ioAddr_t)data[0];          // TODO: validate addr range
@@ -202,7 +198,7 @@ void FrameParserSwitch(frameType_t frameType, u8 * data, u16 dataSize)
 		else SendError(error_INVALID_FRAME_SIZE);
 		break;
 	
-	case frameType_SetValue:
+	case requestFrameType_Set:
 		if (dataSize == 5)
 		{
 			ioAddr_t addr = (ioAddr_t)data[0];          // TODO: validate addr range

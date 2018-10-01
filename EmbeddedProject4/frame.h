@@ -12,23 +12,6 @@
 
 typedef enum
 {
-	frameType_None        = 0,
-	frameType_Ping        = 1,
-	frameType_Update      = 2,
-	frameType_GetValue    = 3,
-	frameType_SetValue    = 4,
-	frameType_Error       = 5,
-	frameType_Pong        = 6,
-	frameType_GetAll      = 7,
-	frameType_UpdateAll   = 8,
-	frameType_PushEnable  = 9,
-	frameType_PushDisable = 10,
-	frameType_Push        = 11
-}
-frameType_t;
-
-typedef enum
-{
 	requestFrameType_Ping = 1,
 	requestFrameType_Get,
 	requestFrameType_GetAll,
@@ -71,7 +54,7 @@ frame_t;
 
 boolean Frame_Parse(frame_t * frame, u8 b);
 void Frame_Print(frame_t * frame);
-void FrameBufferBuilder_Start(cycleBuffer_t * buffer, frameType_t frameType);
+void FrameBufferBuilder_Start(cycleBuffer_t * buffer, u8 frameType);
 void FrameBufferBuilder_End(cycleBuffer_t * buffer);
 
 /*************************************************************************************************/

@@ -190,7 +190,7 @@ void Frame_Print(frame_t * frame)
 static u16 startPoint,// dataCountPoint, 
 	dataStartPoint;
 
-void FrameBufferBuilder_Start(cycleBuffer_t * buffer, frameType_t frameType)
+void FrameBufferBuilder_Start(cycleBuffer_t * buffer, u8 frameType)
 {
 	startPoint = CycleBuffer_GetCurrentWritePosition(buffer);       // For CRC calculation
 
