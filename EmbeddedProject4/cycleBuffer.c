@@ -68,8 +68,6 @@ void CycleBuffer_OverrideU16(cycleBuffer_t * cycleBuffer, u16 position, u16 half
 	CycleBuffer_OverrideByte(cycleBuffer, position, (halfWord & 0xFF00) >> 8);
 }
 
-
-
 u16 CycleBuffer_GetCurrentWritePosition(cycleBuffer_t * cycleBuffer)
 {
 	return cycleBuffer->write;
@@ -119,4 +117,18 @@ crc_t CycleBuffer_Crc(cycleBuffer_t * cycleBuffer, u16 start, u16 end)
 	}
 
 	return CrcCalc_End();
+}
+
+u8 CycleBuffer_Xor(cycleBuffer_t * cycleBuffer, u16 start, u16 end)
+{
+	u8 xor = 0;
+	u16 p = start;
+
+	while (p!=end)
+	{
+		xor ^= cycleBuffer->data[p++];
+		p %= cycleBuffer->size;
+	}
+
+	return xor;
 }

@@ -94,7 +94,7 @@ void Usart2_Init()
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE);
 
 	USART_InitTypeDef UsartConfig;
-	UsartConfig.USART_BaudRate = 256000;
+	UsartConfig.USART_BaudRate = 19200;
 	UsartConfig.USART_WordLength = USART_WordLength_8b;
 	UsartConfig.USART_StopBits = USART_StopBits_1;
 	UsartConfig.USART_Parity = USART_Parity_No;

@@ -18,5 +18,6 @@ void LoadMap(frame_t * frame);
 void LogicRun(void);
 void LogicHold(void);
 void HostTask(void);
+void SendValue(u8 addr, u32 value);
 
 #endif /* HOST_H_ */

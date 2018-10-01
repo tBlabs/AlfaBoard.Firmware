@@ -53,6 +53,9 @@ u16 CycleBuffer_DistanceBetweenPoints(cycleBuffer_t * cycleBuffer, u16 start, u1
 // Crc32
 crc_t CycleBuffer_Crc(cycleBuffer_t * cycleBuffer, u16 start, u16 end);
 
+// Xor
+u8 CycleBuffer_Xor(cycleBuffer_t * cycleBuffer, u16 start, u16 end);
+
 /*************************************************************************************************/
 
 #endif /* CYCLEBUFFER_H_ */

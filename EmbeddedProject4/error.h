@@ -21,7 +21,9 @@ extern const char * errorTypeAsString[];
 // ENUM
 #define ErrorsList(err) \
 /*  0 */	err(error_UNKNOWN_ERROR) \
-/*  0 */	err(error_INVALID_FRAME_TYPE) \
+/*  1 */	err(error_INVALID_FRAME_TYPE) \
+/*  1 */	err(error_INVALID_FRAME_SIZE) \
+/*  2 */	err(error_ARG_OUT_OF_RANGE) \
 
 
 

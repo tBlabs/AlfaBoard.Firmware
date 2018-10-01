@@ -24,6 +24,7 @@ boolean Led1_Get();
 boolean Led2_Get();
 boolean Led3_Get();
 boolean Led4_Get();
+void Led1_Toggle();
 
 /*** If LED_DEBUG_ENABLE==1 **********************************************************************/
 

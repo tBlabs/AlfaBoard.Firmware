@@ -22,9 +22,9 @@ void TemperatureSensor_Init(void)
 
 /*************************************************************************************************/
 
-temperature_t TemperatureSensor_GetTemperature(void)
+u32 TemperatureSensor_GetTemperature(void)
 {
-	static temperature_t temperature;
+	static u32 temperature;
 	static u32 sum;
 	static u16 samplesCount;
 	static timeout_t readSensorMoment;

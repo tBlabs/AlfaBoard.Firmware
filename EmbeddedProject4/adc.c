@@ -1,34 +1,9 @@
-/*
- * adc.c
- *
- *  Created on: Mar 3, 2015
- *      Author: tB
- */
-
-/*************************************************************************************************/
-
 #include "adc.h"
-
 #include "stm32f10x.h"
 #include "stm32f10x_dma.h"
 #include "stm32f10x_adc.h"
 #include "pins.h"
 
-/*************************************************************************************************/
-
-#define ADC_DEBUG_ENABLE	1
-
-
-#if (ADC_DEBUG_ENABLE==0)
-	#define AdcDebug(str,...)
-#else
-	#include "debug.h"
-	#include "delay.h"
-	#include "timeout.h"
-	#define AdcDebug(str,...) Debug(str,##__VA_ARGS__)
-#endif
-
-/*************************************************************************************************/
 /*
 	ADC pins:
 	@A0 - ADC_IN0 <-- in use
@@ -55,10 +30,11 @@ typedef struct
 {
 	pin_t pin;
 	u8 channel;
-	u12 oldValue; // for engine
-	percent_t value;
+	u12 oldValue;    // for engine
+	u12 value;
+	u12 val;
 	u32 samplesSum;
-	u8 sampleIndex;
+	u16 sampleIndex;
 }
 adc_t;
 
@@ -72,7 +48,8 @@ adc_t;
 /*************************************************************************************************/
 
 #define AdcChannelEnum(e,pin,channel) e,
-enum { AdcChannelsList(AdcChannelEnum) };
+enum { AdcChannelsList(AdcChannelEnum) }
+;
 
 #define AdcChannel(e,pin,channel) {pin,channel},
 adc_t adcChannels[] = { AdcChannelsList(AdcChannel) };
@@ -91,7 +68,7 @@ volatile uint16_t adcValues[adcChannelsCount];
 
 static void DMA_Conf(void)
 {
-	RCC->AHBENR |= 1; // DMA Clock enable
+	RCC->AHBENR |= 1;    // DMA Clock enable
 
 	DMA_DeInit(DMA1_Channel1);
 
@@ -126,7 +103,7 @@ void Adc_Init(void)
 	RCC_ADCCLKConfig(RCC_PCLK2_Div2);
 
 	//IoInit(GPIOA, GPIO_Pin_0 | GPIO_Pin_1, GPIO_Mode_AIN);
-	for (u8 i=0; i<adcChannelsCount; i++)
+	for(u8 i = 0 ; i < adcChannelsCount ; i++)
 	{
 		Pin_Init(&adcChannels[i].pin, GPIO_Mode_AIN);
 	}
@@ -145,7 +122,7 @@ void Adc_Init(void)
 
 	u8 rank = 1;
 
-	for (u8 i=0; i<adcChannelsCount; i++)
+	for (u8 i = 0; i < adcChannelsCount; i++)
 	{
 		ADC_RegularChannelConfig(ADC1, adcChannels[i].channel, rank++, ADC_SampleTime_71Cycles5);
 	}
@@ -157,52 +134,53 @@ void Adc_Init(void)
 
 	ADC_ResetCalibration(ADC1);
 
-	while (ADC_GetResetCalibrationStatus(ADC1)) {};
+	while (ADC_GetResetCalibrationStatus(ADC1)) {}
+	;
 
 	ADC_StartCalibration(ADC1);
 
-	while (ADC_GetCalibrationStatus(ADC1)) {};
+	while (ADC_GetCalibrationStatus(ADC1)) {}
+	;
 
 	ADC_SoftwareStartConvCmd(ADC1, ENABLE);
 }
 
 /*************************************************************************************************/
+#define MAX_SAMPLES_COUNT	1024 // max value: {max of u32}/{adc max value}=1'048'576
 
 static void Adc_Engine(adc_t * adc)
 {
-	#define MAX_SAMPLES_COUNT	128
+	u16 adcValue = (u16)adcValues[adc->channel];
 
-	if ((adc->oldValue - RANGE_CHANGE > adcValues[adc->channel]) || (adcValues[adc->channel] > adc->oldValue + RANGE_CHANGE))
+	adc->samplesSum += adcValue;
+
+	if ((++adc->sampleIndex) >= MAX_SAMPLES_COUNT)
 	{
-		adc->oldValue = (u16)((adcValues[adc->channel]*100) / 4096);
-
-		adc->samplesSum += adc->oldValue;
-
-		if ((adc->sampleIndex++) > MAX_SAMPLES_COUNT)
-		{
-			adc->value = adc->samplesSum / MAX_SAMPLES_COUNT;
-			adc->samplesSum = 0;
-			adc->sampleIndex = 0;
-		}
+		adc->value = adc->samplesSum / MAX_SAMPLES_COUNT;
+		adc->val = adc->value / 10;
+		adc->samplesSum = 0;
+		adc->sampleIndex = 0;
 	}
 }
 
-/*************************************************************************************************/
-
-u16 Adc1_Value(void)
+void ADCs_Engine()
 {
-	 Adc_Engine(&adcChannels[adcChannel_1]);
-
-	 return adcChannels[adcChannel_1].value;
+	Adc_Engine(&adcChannels[adcChannel_1]);
+	Adc_Engine(&adcChannels[adcChannel_2]);
 }
 
 /*************************************************************************************************/
 
-u16 Adc2_Value(void)
+u32 Adc1_Value(void)
 {
-	 Adc_Engine(&adcChannels[adcChannel_2]);
+	 return adcChannels[adcChannel_1].val;
+}
 
-	 return adcChannels[adcChannel_2].value;
+/*************************************************************************************************/
+
+u32 Adc2_Value(void)
+{
+	 return adcChannels[adcChannel_2].val;
 }
 
 /*************************************************************************************************/
@@ -210,35 +188,10 @@ u16 Adc2_Value(void)
 u16 Thermo1_Value(void)
 {
 	// COŒ NIE DZIA£A W TEJ FUNKCJI. KIEDYŒ GRA£O. I TAK LEPSZY BY£Y ZEWNÊTRZNY CZUJNIK...
-	return 0;//(1430 - ((float)adcValues[adcChannel_Thermo1])*0.805) / 4.3 + 25;
+	return 0;   //(1430 - ((float)adcValues[adcChannel_Thermo1])*0.805) / 4.3 + 25;
 	//u32 t = adcValues[adcChannel_Thermo1]*1000;
 	//return ((((u32)1430000 - (u32)(t*805)) / 4300) + 25000)/1000;
 }
 
 /*************************************************************************************************/
 
-#if (ADC_DEBUG_ENABLE==1)
-
-void Adc_Test(void)
-{
-	static timeout_t printMoment;
-
-	Adc_Init();
-
-	while(1)
-	{
-		Adc_Engine(&adcChannels[adcChannel_1]);
-		Adc_Engine(&adcChannels[adcChannel_2]);
-
-		if (Tick(&printMoment, 250))
-		{
-			AdcDebug("Adc1: %u (%u)", Adc1_Value(), adcValues[adcChannel_1]);
-			AdcDebug("Adc2: %u (%u)", Adc2_Value(), adcValues[adcChannel_2]);
-		//	AdcDebug("Thermo1: %u (%u)", Thermo1_Value(), adcValues[adcChannel_Thermo1]);
-		}
-	}
-}
-
-#endif
-
-/*************************************************************************************************/

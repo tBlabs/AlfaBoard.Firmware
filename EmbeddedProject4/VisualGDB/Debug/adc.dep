@@ -13,8 +13,7 @@ VisualGDB/Debug/adc.o: adc.c adc.h typedefs.h \
  C:/Users/tB/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F1xxxx/STM32F10x_StdPeriph_Driver/inc/stm32f10x_adc.h \
  pins.h \
  C:/Users/tB/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F1xxxx/STM32F10x_StdPeriph_Driver/inc/stm32f10x_gpio.h \
- C:/Users/tB/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F1xxxx/STM32F10x_StdPeriph_Driver/inc/stm32f10x_rcc.h \
- debug.h delay.h timeout.h
+ C:/Users/tB/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F1xxxx/STM32F10x_StdPeriph_Driver/inc/stm32f10x_rcc.h
 
 adc.h:
 
@@ -49,9 +48,3 @@ pins.h:
 C:/Users/tB/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F1xxxx/STM32F10x_StdPeriph_Driver/inc/stm32f10x_gpio.h:
 
 C:/Users/tB/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F1xxxx/STM32F10x_StdPeriph_Driver/inc/stm32f10x_rcc.h:
-
-debug.h:
-
-delay.h:
-
-timeout.h:

@@ -12,18 +12,41 @@
 
 typedef enum
 {
-    frameType_None,
-    frameType_Message, // text message from device
-    frameType_Ok, // after: _Ok, _LogicMap, _Hold, _Run
-    frameType_Error,
-    frameType_Test, // connection test
-    frameType_Config,
-    frameType_Param, // for virtual parser (one of physical devices)
-	frameType_GetValue,
-	frameType_SetValue,
-	frameType_Update,
+	frameType_None        = 0,
+	frameType_Ping        = 1,
+	frameType_Update      = 2,
+	frameType_GetValue    = 3,
+	frameType_SetValue    = 4,
+	frameType_Error       = 5,
+	frameType_Pong        = 6,
+	frameType_GetAll      = 7,
+	frameType_UpdateAll   = 8,
+	frameType_PushEnable  = 9,
+	frameType_PushDisable = 10,
+	frameType_Push        = 11
 }
 frameType_t;
+
+typedef enum
+{
+	requestFrameType_Ping = 1,
+	requestFrameType_Get,
+	requestFrameType_GetAll,
+	requestFrameType_Set,
+	requestFrameType_PushStateSet,
+}
+requestFrameType_t;
+
+typedef enum
+{
+	responseFrameType_Pong = 1,
+	responseFrameType_Error,
+	responseFrameType_Update,
+	responseFrameType_UpdateAll,
+	responseFrameType_PushStateUpdate,
+}
+responseFrameType_t;
+
 
 /*************************************************************************************************/
 
@@ -34,13 +57,13 @@ frameType_t;
 /*************************************************************************************************/
 
 
-typedef struct PACKED
+typedef struct //PACKED
 {
-	 u8 type; // could be type of frameType_t but only for transmitted frames
-	 u16 dataSize; // real size of data[]
-	 u8 data[FRAME_DATA_CAPACITY]; // data buffer
-	 crc_t crc;
-	 unsigned valid :1;
+	u8 type;   // could be type of frameType_t but only for transmitted frames
+	u8 dataSize;   // real size of data[]
+	u8 data[FRAME_DATA_CAPACITY];   // data buffer
+	u8 xor;
+	boolean valid;
 }
 frame_t;
 
