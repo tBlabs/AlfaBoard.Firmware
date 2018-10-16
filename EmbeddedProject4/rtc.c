@@ -50,7 +50,7 @@ void Clock_SubtractSeconds(u32 secondsToSubtract)
 	if (secondsToSubtract > 0)
 	{
 		//
-		if (SystemTimestamp >= secondsToSubtract) // >= ????
+		if(SystemTimestamp >= secondsToSubtract) // >= ????
 		{
 			Clock_Set(SystemTimestamp - secondsToSubtract);
 		}
@@ -66,6 +66,11 @@ void Clock_SubtractSeconds(u32 secondsToSubtract)
  * wewnêtrznego timestampa tej struktury z timestampem
  * systemowym.
  */
+
+timestamp_t Clock_Get(void)
+{
+	return SystemTimestamp;
+}
 
 static void UpdateClockValues(void)
 {
@@ -152,7 +157,7 @@ static void RTC_Configuration(void)
 	RCC_LSEConfig(RCC_LSE_ON);
 
 	// Wait till LSE is ready
-	while (RCC_GetFlagStatus(RCC_FLAG_LSERDY) == RESET);
+	while(RCC_GetFlagStatus(RCC_FLAG_LSERDY) == RESET);
 
 	// Select LSE as RTC Clock Source
 	RCC_RTCCLKConfig(RCC_RTCCLKSource_LSE);
@@ -173,7 +178,7 @@ static void RTC_Configuration(void)
 	RTC_WaitForLastTask();
 
 	// Set RTC prescaler: set RTC period to 1sec
-	RTC_SetPrescaler(32767); // RTC period = RTCCLK/RTC_PR = (32.768 KHz)/(32767+1)
+	RTC_SetPrescaler(32767);  // RTC period = RTCCLK/RTC_PR = (32.768 KHz)/(32767+1)
 
 	// Wait until last write operation on RTC registers has finished
 	RTC_WaitForLastTask();
@@ -201,13 +206,13 @@ void Clock_Init(void)
 	else
 	{
 		// Check if the Power On Reset flag is set
-		if (RCC_GetFlagStatus(RCC_FLAG_PORRST) != RESET)
+		if(RCC_GetFlagStatus(RCC_FLAG_PORRST) != RESET)
 		{
 			// Power On Reset occurred..
 		}
 		else
 		// Check if the Pin Reset flag is set
-		if (RCC_GetFlagStatus(RCC_FLAG_PINRST) != RESET)
+		if(RCC_GetFlagStatus(RCC_FLAG_PINRST) != RESET)
 		{
 			// External Reset occurred..
 		}

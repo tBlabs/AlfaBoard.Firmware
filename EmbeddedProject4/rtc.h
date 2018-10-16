@@ -28,6 +28,7 @@
 void Clock_Init(void);
 
 void Clock_Set(timestamp_t timestamp);
+timestamp_t Clock_Get(void);
 void Clock_AddSeconds(u32 secondsToAdd);
 void Clock_SubtractSeconds(u32 secondsToSubtract);
 

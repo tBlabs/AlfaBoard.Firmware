@@ -36,7 +36,8 @@ VisualGDB/Debug/host.o: host.c host.h error.h typedefs.h \
  C:/Users/tB/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F1xxxx/STM32F10x_StdPeriph_Driver/inc/stm32f10x_gpio.h \
  C:/Users/tB/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/STM32F1xxxx/STM32F10x_StdPeriph_Driver/inc/stm32f10x_rcc.h \
  timeout.h debug.h pwms.h adc.h temperature_sensor.h displays.h display.h \
- buzzer.h dac.h
+ buzzer.h dac.h rtc.h \
+ C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/clockvalues.h
 
 host.h:
 
@@ -143,3 +144,7 @@ display.h:
 buzzer.h:
 
 dac.h:
+
+rtc.h:
+
+C:/Users/tB/source/repos/EmbeddedProject4/EmbeddedProject4/clockvalues.h:

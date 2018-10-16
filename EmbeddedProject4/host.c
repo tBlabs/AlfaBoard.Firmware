@@ -19,9 +19,10 @@
 #include "displays.h"
 #include "buzzer.h"
 #include "dac.h"
+#include "rtc.h"
 
 
-#define SENSORS_COUNT	7
+#define SENSORS_COUNT	8
 
 void SendPong(void)
 {
@@ -68,22 +69,24 @@ void SendValues(u32 * values)
 
 typedef enum 
 {
-	ioAddr_Input1,
+	ioAddr_Input1, // 0
 	ioAddr_Input2,
 	ioAddr_Input3,
 	ioAddr_Input4,
 	ioAddr_Adc1,
 	ioAddr_Adc2,
-	ioAddr_Temper1       = 6,
+	ioAddr_Temper1,
+	ioAddr_Rtc,	
+	ioAddr_RtcSet, // 8
 	ioAddr_Led1,
 	ioAddr_Led2,
 	ioAddr_Led3,
 	ioAddr_Led4,
-	ioAddr_Pwm1          = 11,
+	ioAddr_Pwm1,
 	ioAddr_Pwm2,
 	ioAddr_Pwm3,
-	ioAddr_Pwm4,
-	ioAddr_Display1      = 15,
+	ioAddr_Pwm4, 
+	ioAddr_Display1,
 	ioAddr_Display1Dot,
 	ioAddr_Display2,
 	ioAddr_Display2Dot,
@@ -102,15 +105,16 @@ u32 PeripheralsManager_GetValueByAddr(ioAddr_t ioAddr)
 {
 	switch (ioAddr)
 	{
-	case ioAddr_Input1: return Button1_Get();
-	case ioAddr_Input2: return Button2_Get();
-	case ioAddr_Input3: return Button3_Get();
-	case ioAddr_Input4: return Button4_Get();
-	case ioAddr_Adc1: return Adc1_Value();
-	case ioAddr_Adc2: return Adc2_Value();
-	case ioAddr_Temper1: return TemperatureSensor_GetTemperature(); break;
+		case ioAddr_Input1: return Button1_Get();
+		case ioAddr_Input2: return Button2_Get();
+		case ioAddr_Input3: return Button3_Get();
+		case ioAddr_Input4: return Button4_Get();
+		case ioAddr_Adc1: return Adc1_Value();
+		case ioAddr_Adc2: return Adc2_Value();
+		case ioAddr_Temper1: return TemperatureSensor_GetTemperature(); break;
+		case ioAddr_Rtc: return Clock_Get(); break;
 		
-	default: return 0;
+		default: return 0;
 	}
 	
 	return 0;
@@ -139,6 +143,7 @@ boolean PeripheralsManager_SetValueByAddr(ioAddr_t ioAddr, u32 value)
 	case ioAddr_Buzzer1Volume: Buzzer1_SetVolume(value); break;
 	case ioAddr_Buzzer1Freq: Buzzer1_SetFrequency(value); break;
 	case ioAddr_Dac1Value: DAC1_Value(value); break;
+	case ioAddr_RtcSet: Clock_Set(value); break;
 	default: return false;
 	}
 	

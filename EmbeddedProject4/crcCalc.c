@@ -13,7 +13,6 @@
 void CrcCalc_Start()
 {
 	//Debug("CrcCalc_Start()");
-
 	crcCalc.tempU32 = 0;
 	crcCalc.tempU32byteIndex = 0;
 	crcCalc.collectData = true;
